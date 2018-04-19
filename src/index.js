@@ -8,17 +8,17 @@ import Contoh from './contoh/Contoh';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min';
 import 'bootstrap/dist/js/bootstrap.min';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Content from "./contoh/Content";
 import NotFound from "./not_found/NotFound";
 
 ReactDOM.render((
         <Router>
-            <switch>
+            <Switch>
                 <Route exact path="/" component={Contoh}/>
                 <Route exact path="/test" component={Content}/>
                 <Route component={NotFound} />
-            </switch>
+            </Switch>
         </Router>
     ), document.getElementById('root'));
 // registerServiceWorker();
