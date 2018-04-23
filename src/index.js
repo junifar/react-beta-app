@@ -4,6 +4,7 @@ import './index.css';
 // import './css/theme.css';
 // import App from './App';
 import Contoh from './contoh/Contoh';
+import ToDo from './todo/components/ToDo';
 // import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min';
@@ -17,6 +18,7 @@ ReactDOM.render((
             <Switch>
                 <Route exact path="/" component={Contoh}/>
                 <Route exact path="/test" component={Content}/>
+                <Route exact path="/todo" component={ToDo}/>
                 <Route component={NotFound} />
             </Switch>
         </Router>

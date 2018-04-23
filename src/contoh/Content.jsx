@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 class Content extends Component{
@@ -16,8 +17,11 @@ class Content extends Component{
 					"name": "Hidayat",
 					"age": "29"
 				}
-			]
+			],
+			items:[]
 		}
+
+		axios.get('http://192.168.0.113:7000/data_test.php').then(res => {this.setState({ items: res.data })});
 	}
 	render(){
 		return(
@@ -25,7 +29,7 @@ class Content extends Component{
 				<h2>Apa Kabar</h2>
 				<table>
 	               <tbody>
-	                  {this.state.data.map((person, i) => <TableRow key = {i} 
+	                  {this.state.items.map((person, i) => <TableRow key = {i}
 	                     data = {person} />)}
 	               </tbody>
 	            </table>
