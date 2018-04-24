@@ -26,7 +26,7 @@ class AddNewItem extends React.Component {
         let value = event.target.value;
 
         // If the amount is changed and it's not a float, return.
-        if (value && field === 'amount' && !value.match(/^[a-z0-9.\+\-]+$/g)) {
+        if (value && field === 'amount' && !value.match(/^[a-z0-9.+-]+$/g)) {
             return;
         }
 
