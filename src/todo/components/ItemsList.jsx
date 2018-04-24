@@ -1,15 +1,31 @@
-import React, { Component } from "react";
+import React from 'react';
+import WalletStore from '../stores/walletStore';
 
-class ItemsList extends Component{
+class ItemsList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            items: []
+            items: WalletStore.getAllItems()
         };
+
+        this._onChange = this._onChange.bind(this);
     }
 
-    render(){
+    _onChange() {
+        this.setState({ items: WalletStore.getAllItems() });
+    }
+
+    componentWillMount() {
+        WalletStore.addChangeListener(this._onChange);
+    }
+
+    componentWillUnmount() {
+        WalletStore.removeChangeListener(this._onChange);
+    }
+
+    render() {
+
         let noItemsMessage;
 
         // Show a friendly message instead if there are no items.
@@ -25,7 +41,7 @@ class ItemsList extends Component{
                     return (<li key={itemDetails.id}>{itemDetails.description} <span className={amountType}>{itemDetails.amount}</span></li>);
                 })}
             </ul>
-        )
+        );
     }
 }
 

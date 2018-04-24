@@ -1,6 +1,9 @@
-import React, { Component } from "react";
+import React from 'react';
+import WalletActions from '../actions/walletActions';
+import WalletStore from '../stores/walletStore';
 
-class AddNewItem extends Component{
+class AddNewItem extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -18,13 +21,12 @@ class AddNewItem extends Component{
         };
     }
 
-    // Update the state.
     _updateState(event) {
         let field = event.target.name;
         let value = event.target.value;
 
         // If the amount is changed and it's not a float, return.
-        if (value && field === 'amount' && !value.match(/^[a-z0-9.+-]+$/g)) {
+        if (value && field === 'amount' && !value.match(/^[a-z0-9.\+\-]+$/g)) {
             return;
         }
 
@@ -32,15 +34,18 @@ class AddNewItem extends Component{
         this.setState({ item : this.state.item });
     }
 
-    // Add a new item.
     _addNewItem(event) {
-        // ...
+        event.preventDefault();
+        this.state.item.description = this.state.item.description || '-';
+        this.state.item.amount = this.state.item.amount || '0';
+        WalletActions.addNewItem(this.state.item);
+        this.setState({ item : this._getFreshItem() });
     }
 
-    render(){
+    render() {
         return (
             <div>
-                <h3 className="total-budget">$0</h3>
+                <h3 className="total-budget">${WalletStore.getTotalBudget()}</h3>
                 <form className="form-inline add-item" onSubmit={this._addNewItem.bind(this)}>
                     <input type="text" className="form-control description" name="description" value={this.state.item.description} placeholder="Description" onChange={this._updateState.bind(this)} />
                     <div className="input-group amount">

@@ -12,6 +12,7 @@ import 'bootstrap/dist/js/bootstrap.min';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Content from "./contoh/Content";
 import NotFound from "./not_found/NotFound";
+import Pos from "./pos/components/Pos";
 
 ReactDOM.render((
         <Router>
@@ -19,6 +20,7 @@ ReactDOM.render((
                 <Route exact path="/" component={Contoh}/>
                 <Route exact path="/test" component={Content}/>
                 <Route exact path="/todo" component={ToDo}/>
+                <Route exact path="/pos" component={Pos}/>
                 <Route component={NotFound} />
             </Switch>
         </Router>
