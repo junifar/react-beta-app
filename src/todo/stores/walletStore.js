@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import Dispatcher from '../dispatcher';
-import ActionTypes from '../constants';
+import Dispatcher from '../../global/dispatcher';
+import ActionTypes from '../../global/constants';
 
 const CHANGE = 'CHANGE';
 let _walletState = [];
