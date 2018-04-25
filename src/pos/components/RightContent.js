@@ -1,6 +1,43 @@
 import React, { Component } from 'react';
+import posActions from "../actions/posActions";
+import ProductItemList from "./ProductItemList";
 
 class RightContent extends Component{
+
+    constructor(props){
+        super(props);
+
+        this._getFreshItem = this._getFreshItem.bind(this);
+
+        this.state = {
+            item: this._getFreshItem()
+        };
+    }
+
+    _addNewItem(event){
+        event.preventDefault();
+        posActions.addNewItem(this.state.item);
+        this.setState({ item : this._getFreshItem() });
+    }
+
+    _updateState(event){
+        let field = event.target.name;
+        let value = event.target.value;
+
+        this.state.item[field] = value;
+        this.state.item.name = "Luar Biasa";
+        this.state.item.amount = "RP. 13.000,00"
+        this.setState({ item: this.state.item });
+    }
+
+    _getFreshItem(){
+        return{
+            code: '',
+            name: '',
+            amount: ''
+        };
+    }
+
     render(){
         return(
             <div className="col-md-4 order-md-2">
@@ -8,44 +45,16 @@ class RightContent extends Component{
                     <span className="text-muted">Your cart</span>
                     <span className="badge badge-pill badge-secondary">3</span>
                 </h4>
-                <form className="card p-2">
+                <form className="card p-2" onSubmit={this._addNewItem.bind(this)}>
                     <div className="input-group">
-                        <input type="text" className="form-control" placeholder="Scan Code"/> </div>
+                        <input type="text" className="form-control" name="code" placeholder="Scan Code" value={this.state.item.code}
+                        onChange={this._updateState.bind(this)}/>
+                        <div className="input-group-append">
+                            <button type="submit" className="btn btn-secondary">Add</button>
+                        </div>
+                    </div>
                 </form>
-                <ul className="list-group mb-3">
-                    <li className="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 className="my-0">Product name</h6>
-                            <small className="text-muted">Brief description</small>
-                        </div>
-                        <span className="text-muted">$12</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 className="my-0">Second product</h6>
-                            <small className="text-muted">Brief description</small>
-                        </div>
-                        <span className="text-muted">$8</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 className="my-0">Third item</h6>
-                            <small className="text-muted">Brief description</small>
-                        </div>
-                        <span className="text-muted">$5</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between bg-light">
-                        <div className="text-success">
-                            <h6 className="my-0">Promo code</h6>
-                            <small>EXAMPLECODE</small>
-                        </div>
-                        <span className="text-success">-$5</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong>$20</strong>
-                    </li>
-                </ul>
+                <ProductItemList/>
                 <form className="card p-2">
                     <div className="input-group">
                         <input type="text" className="form-control" placeholder="Promo code"/>

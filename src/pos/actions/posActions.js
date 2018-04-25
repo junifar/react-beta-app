@@ -1,5 +1,5 @@
-import ActionTypes from "../constants";
-import Dispatcher from '../dispatcher';
+import ActionTypes from "../../global/constants";
+import Dispatcher from '../../global/dispatcher';
 
 class PosActions {
 
