@@ -39,14 +39,14 @@ class ProductItemList extends Component{
         return(
             <ul className="list-group mb-3">
                 {noItemsMessage}
-                {this.state.items.map((itemDetails) => {
+                {this.state.items.map((itemDetails, i) => {
                     return (
-                        <li className="list-group-item d-flex justify-content-between lh-condensed">
+                        <li className="list-group-item d-flex justify-content-between lh-condensed" key={i}>
                             <div>
                                 <h6 className="my-0">{itemDetails.code}</h6>
                                 <small className="text-muted">{itemDetails.name}</small>
                             </div>
-                            <span className="text-muted">{itemDetails.amount}</span>
+                            <span className="text-muted">{}</span>
                         </li>
                     )
                 })}

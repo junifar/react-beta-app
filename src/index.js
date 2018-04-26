@@ -13,6 +13,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Content from "./contoh/Content";
 import NotFound from "./not_found/NotFound";
 import Pos from "./pos/components/Pos";
+import QuaggaSample from "./quagga/QuaggaSample";
 
 ReactDOM.render((
         <Router>
@@ -21,6 +22,7 @@ ReactDOM.render((
                 <Route exact path="/test" component={Content}/>
                 <Route exact path="/todo" component={ToDo}/>
                 <Route exact path="/pos" component={Pos}/>
+                <Route exact path="/quagga" component={QuaggaSample}/>
                 <Route component={NotFound} />
             </Switch>
         </Router>
