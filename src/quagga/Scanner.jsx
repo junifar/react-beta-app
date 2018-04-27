@@ -3,10 +3,6 @@ import Quagga from 'quagga';
 
 class Scanner extends Component{
 
-    constructor(props){
-        super(props);
-    }
-
     render() {
         return (
             <div id="interactive" className="viewport"/>

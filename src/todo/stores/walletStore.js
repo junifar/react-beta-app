@@ -20,6 +20,8 @@ class WalletStore extends EventEmitter {
             case ActionTypes.ADD_NEW_ITEM:
                 this._addNewItem(action.payload);
                 break;
+            default:
+                break;
         }
     }
 

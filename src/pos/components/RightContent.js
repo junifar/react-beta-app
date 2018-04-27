@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import posActions from "../actions/posActions";
 import ProductItemList from "./ProductItemList";
-import PosStore from "../stores/PosStore";
 import jQuery from 'jquery/dist/jquery.min';
 window.jQuery = jQuery;
 require('jQuery-Scanner-Detection/jquery.scannerdetection');
@@ -25,9 +24,12 @@ class RightContent extends Component{
     }
 
     _updateStateManual(value){
-        this.state.item.code = value;
-        this.state.item.name = "Luar Biasa";
-        this.state.item.amount = "RP. 13.000,00";
+        const items = this.state.item;
+        items.code = value;
+        items.name = "Luar Biasa";
+        items.item.amount = "RP. 13.000,00";
+
+        this.setState({ items });
         this.setState({ item: this.state.item });
     }
 
@@ -35,9 +37,12 @@ class RightContent extends Component{
         let field = event.target.name;
         let value = event.target.value;
 
-        this.state.item[field] = value;
-        this.state.item.name = "Luar Biasa";
-        this.state.item.amount = "RP. 13.000,00";
+        const items = this.state.item;
+        items[field] = value;
+        items.name = "Luar Biasa";
+        items.amount = "RP. 13.000,00";
+
+        this.setState({items});
         this.setState({ item: this.state.item });
     }
 
@@ -50,7 +55,7 @@ class RightContent extends Component{
         jQuery(document).ready(function(){
             jQuery(document).scannerDetection({
                 onComplete: function(barcode){
-                    jQuery('#serialInput').val(barcode).change();
+                    // jQuery('#serialInput').val(barcode).change();
                     _._updateStateManual(barcode);
                     jQuery('#submit_serial').click();
                 }

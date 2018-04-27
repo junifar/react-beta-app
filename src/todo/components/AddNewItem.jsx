@@ -1,4 +1,5 @@
 import React from 'react';
+// import update from 'react-addons-update';
 import WalletActions from '../actions/walletActions';
 import WalletStore from '../stores/walletStore';
 
@@ -30,14 +31,20 @@ class AddNewItem extends React.Component {
             return;
         }
 
-        this.state.item[field] = value;
+        const items = this.state.item;
+        items[field] = value;
+
+        this.setState({items});
         this.setState({ item : this.state.item });
     }
 
     _addNewItem(event) {
         event.preventDefault();
-        this.state.item.description = this.state.item.description || '-';
-        this.state.item.amount = this.state.item.amount || '0';
+        const items = this.state.item;
+        items.description = this.state.item.description || '-';
+        items.amount = this.state.item.amount || '0';
+
+        this.setState({items});
         WalletActions.addNewItem(this.state.item);
         this.setState({ item : this._getFreshItem() });
     }

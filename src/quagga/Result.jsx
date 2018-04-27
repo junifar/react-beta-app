@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
 class Result extends Component{
-    constructor(props){
-        super(props);
-
-        this.state = {
-            result: React.PropTypes.object
-        }
-    }
+    // constructor(props){
+    //     super(props);
+    //
+    //     this.state = {
+    //         result: React.PropTypes.object
+    //     }
+    // }
 
     render() {
         const result = this.props.result;
