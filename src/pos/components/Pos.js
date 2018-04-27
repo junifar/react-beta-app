@@ -1,27 +1,29 @@
 import React, { Component } from "react";
 import LeftContent from "./LeftContent";
 import RightContent from "./RightContent";
-import jQuery from 'jquery/dist/jquery.min';
-window.jQuery = jQuery;
-require('jQuery-Scanner-Detection/jquery.scannerdetection');
+// import jQuery from 'jquery/dist/jquery.min';
+// window.jQuery = jQuery;
+// require('jQuery-Scanner-Detection/jquery.scannerdetection');
 
 class Pos extends Component {
 
-    componentDidMount(){
-        window.addEventListener('load', this.handleLoad);
-    }
-
-    handleLoad(){
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.async = true;
-        script.innerHTML = "jQuery(document).scannerDetection({" +
-            "onComplete: function(barcode){" +
-            "alert(barcode);" +
-            "}" +
-            "});";
-        document.body.appendChild(script);
-    }
+    // componentDidMount(){
+    //     window.addEventListener('load', this.handleLoad);
+    // }
+    //
+    // handleLoad(){
+    //     const script = document.createElement('script');
+    //     script.type = 'text/javascript';
+    //     script.async = true;
+    //     script.innerHTML = "jQuery(document).scannerDetection({" +
+    //         "onComplete: function(barcode){" +
+    //         "jQuery('#serialInput').val(barcode);" +
+    //         "jQuery('#formSerial').submit();" +
+    //         // "alert(barcode);" +
+    //         "}" +
+    //         "});";
+    //     document.body.appendChild(script);
+    // }
 
     render() {
         return (

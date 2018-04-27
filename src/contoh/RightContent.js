@@ -10,7 +10,7 @@ class RightContent extends Component{
                 </h4>
                 <form className="card p-2">
                     <div className="input-group">
-                        <input type="text" className="form-control" placeholder="Scan Code"/> </div>
+                        <input type="text" id="serialInput" className="form-control" placeholder="Scan Code"/> </div>
                 </form>
                 <ul className="list-group mb-3">
                     <li className="list-group-item d-flex justify-content-between lh-condensed">

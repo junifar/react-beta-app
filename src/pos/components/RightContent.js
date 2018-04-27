@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import posActions from "../actions/posActions";
 import ProductItemList from "./ProductItemList";
+import PosStore from "../stores/PosStore";
+import jQuery from 'jquery/dist/jquery.min';
+window.jQuery = jQuery;
+require('jQuery-Scanner-Detection/jquery.scannerdetection');
 
 class RightContent extends Component{
 
@@ -20,14 +24,38 @@ class RightContent extends Component{
         this.setState({ item : this._getFreshItem() });
     }
 
+    _updateStateManual(value){
+        this.state.item.code = value;
+        this.state.item.name = "Luar Biasa";
+        this.state.item.amount = "RP. 13.000,00";
+        this.setState({ item: this.state.item });
+    }
+
     _updateState(event){
         let field = event.target.name;
         let value = event.target.value;
 
         this.state.item[field] = value;
         this.state.item.name = "Luar Biasa";
-        this.state.item.amount = "RP. 13.000,00"
+        this.state.item.amount = "RP. 13.000,00";
         this.setState({ item: this.state.item });
+    }
+
+    componentDidMount(){
+        this._renderAction()
+    }
+
+    _renderAction(){
+        var _ = this;
+        jQuery(document).ready(function(){
+            jQuery(document).scannerDetection({
+                onComplete: function(barcode){
+                    jQuery('#serialInput').val(barcode).change();
+                    _._updateStateManual(barcode);
+                    jQuery('#submit_serial').click();
+                }
+            });
+        });
     }
 
     _getFreshItem(){
@@ -45,12 +73,12 @@ class RightContent extends Component{
                     <span className="text-muted">Your cart</span>
                     <span className="badge badge-pill badge-secondary">3</span>
                 </h4>
-                <form className="card p-2" onSubmit={this._addNewItem.bind(this)}>
+                <form id="formSerial" className="card p-2" onSubmit={this._addNewItem.bind(this)}>
                     <div className="input-group">
-                        <input type="text" className="form-control" name="code" placeholder="Scan Code" value={this.state.item.code}
+                        <input type="text" id="serialInput" className="form-control" name="code" placeholder="Scan Code" value={this.state.item.code}
                         onChange={this._updateState.bind(this)}/>
                         <div className="input-group-append">
-                            <button type="submit" className="btn btn-secondary">Add</button>
+                            <button type="submit" className="btn btn-secondary" id="submit_serial">Add</button>
                         </div>
                     </div>
                 </form>
